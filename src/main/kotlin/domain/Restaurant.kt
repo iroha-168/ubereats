@@ -13,13 +13,10 @@ data class Restaurant(
         @OptIn(ExperimentalUuidApi::class)
         // memo: 外部からのアクセス時に、エラーを返すメソッドであることが判断できるように型をResultにする
         fun create(name: String, description: String): Result<Restaurant> {
-            // === バリデーションチェック ===
-            // name 1文字以上、100文字以内
-            // description 1文字以上、200文字以内
-            // 空文字無し、特殊文字なし
-            if (
-                !validateName(name) || !validateDescription(description)
-            ) {
+            if (!validateName(name)) {
+                return Result.failure(IllegalStateException())
+            }
+            if (!validateDescription(description)) {
                 return Result.failure(IllegalStateException())
             }
             return Result.success(
