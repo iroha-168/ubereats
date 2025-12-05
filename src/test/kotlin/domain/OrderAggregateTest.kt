@@ -1,7 +1,7 @@
-import domain.DeliveryAddress
-import domain.Order
-import domain.Order.OrderStatus
-import domain.OrderId
+import domain.restaurant.entity.DeliveryAddress
+import domain.restaurant.entity.Order
+import domain.restaurant.entity.Order.OrderStatus
+import domain.restaurant.entity.OrderId
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

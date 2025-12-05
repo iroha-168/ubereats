@@ -1,4 +1,6 @@
-package domain
+package domain.restaurant.service
+
+import domain.restaurant.entity.Order
 
 class RestaurantUpdatePolicyService {
     operator fun invoke(orders: List<Order>): Result<Unit> {

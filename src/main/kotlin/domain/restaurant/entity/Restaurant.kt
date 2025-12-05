@@ -1,4 +1,4 @@
-package domain
+package domain.restaurant.entity
 
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

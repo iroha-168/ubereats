@@ -1,4 +1,6 @@
-package domain
+package domain.restaurant.service
+
+import domain.restaurant.entity.Order
 
 class RestaurantDeletionPolicyService {
     // TIPS: Repositoryを介して、SQLの条件式によって、CANCEL以外の注文を全て取得するってことができるから、

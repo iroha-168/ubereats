@@ -1,5 +1,6 @@
 package domain
 
+import domain.restaurant.entity.Discount
 import kotlin.test.Test
 import kotlin.uuid.ExperimentalUuidApi
 
@@ -11,11 +12,13 @@ class DiscountTest {
         // given
         val name = "キャンペーン割引"
         val percentage = 0.123
+        val restaurantId = "1"
 
         // when
         val result = Discount.create(
             name = name,
-            percentage = percentage
+            percentage = percentage,
+            restaurantId = restaurantId,
         )
 
         // then
@@ -28,11 +31,13 @@ class DiscountTest {
         // given
         val name = "キャンペーン割引"
         val percentage = 0.15
+        val restaurantId = "1"
 
         // when
         val result = Discount.create(
             name = name,
-            percentage = percentage
+            percentage = percentage,
+            restaurantId = restaurantId
         )
 
         // then
