@@ -1,0 +1,43 @@
+package interface_adapter.repository
+
+import domain.restaurant.entity.Restaurant
+import domain.restaurant.repository.RestaurantRepository
+import interface_adapter.schema.Restaurants
+import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.jdbc.deleteWhere
+import org.jetbrains.exposed.v1.jdbc.insert
+import org.jetbrains.exposed.v1.jdbc.selectAll
+import org.jetbrains.exposed.v1.jdbc.update
+import kotlin.time.Clock
+
+class RestaurantRepositoryImpl: RestaurantRepository {
+    override fun findById(restaurantId: String): Result<Restaurant> = runCatching {
+        Restaurants.selectAll().where { Restaurants.id eq restaurantId }.map {
+            Restaurant(
+                id = it[Restaurants.id],
+                name = it[Restaurants.name],
+                description = it[Restaurants.description],
+            )
+        }.first()
+    }
+
+    override fun create(restaurant: Restaurant): Result<Unit> = runCatching {
+        Restaurants.insert {
+            it[id] = restaurant.id
+            it[name] = restaurant.name
+            it[description] = restaurant.description
+        }
+    }
+
+    override fun update(restaurant: Restaurant): Result<Unit> = runCatching {
+        Restaurants.update({ Restaurants.id eq restaurant.id}) {
+            it[name] = restaurant.name
+            it[description] = restaurant.description
+            it[updatedAt] = Clock.System.now()
+        }
+    }
+
+    override fun delete(restaurant: Restaurant): Result<Unit> = runCatching {
+        Restaurants.deleteWhere { Restaurants.id eq restaurant.id }
+    }
+}
