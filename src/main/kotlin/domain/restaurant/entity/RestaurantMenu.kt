@@ -150,12 +150,10 @@ data class RestaurantMenu(
     }
 
     private fun validateName(name: String): Boolean =
-        name.length in 1..<100 &&
-        name.isNotBlank()
+        name.length in 1..<100 && name.isNotBlank()
 
     private fun validateDescription(description: String): Boolean =
-        description.length in 1..<200 &&
-        description.isNotBlank()
+        description.length in 1..<200 && description.isNotBlank()
 
     private fun validatePrice(price: Int): Boolean = 0 <= price
 }

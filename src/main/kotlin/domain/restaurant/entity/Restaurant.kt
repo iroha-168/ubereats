@@ -28,13 +28,11 @@ data class Restaurant(
             )
         }
 
-        private fun validateDescription(description: String): Boolean {
-            return !(200 < description.length || description.isBlank())
-        }
+        private fun validateName(name: String): Boolean =
+            name.length in 1..<100 && name.isNotBlank()
 
-        private fun validateName(name: String): Boolean {
-            return !(100 < name.length || name.isBlank())
-        }
+        private fun validateDescription(description: String): Boolean =
+            description.length in 1..<200 && description.isNotBlank()
     }
 
     // 削除
