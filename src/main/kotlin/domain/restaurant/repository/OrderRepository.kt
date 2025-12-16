@@ -1,16 +1,16 @@
 package domain.restaurant.repository
 
-import domain.restaurant.entity.OrderAggregate
+import domain.restaurant.entity.Order
 import domain.restaurant.entity.OrderId
 
 interface OrderRepository {
-    fun findAll(restaurantId: String): Result<OrderAggregate>
+    fun findAll(restaurantId: String): Result<Order>
 
-    fun findById(restaurantId: String, orderId: OrderId): Result<OrderAggregate>
+    fun findById(restaurantId: String, orderId: OrderId): Result<Order>
 
-    fun create(orderAggregate: OrderAggregate): Result<Unit>
+    fun create(order: Order): Result<Unit>
 
-    fun update(orderAggregate: OrderAggregate): Result<Unit>
+    fun update(order: Order): Result<Unit>
 
-    fun delete(orderAggregate: OrderAggregate): Result<Unit>
+    fun delete(order: Order): Result<Unit>
 }

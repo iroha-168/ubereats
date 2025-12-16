@@ -4,7 +4,8 @@ import org.jetbrains.exposed.v1.core.Table
 
 object RestaurantMenuItems : Table("restaurant_menus") {
     val id = varchar("id", 36)
-    val restaurantId = varchar("restaurant_id", 36)
+    val restaurantId = reference("restaurant_id", Restaurants.id)
+    // TODO: Discountというテーブルができたらreference()使って書き直す
     val discountId = varchar("discount_id", 36).nullable()
     val name = varchar("menu", 255)
     val description = varchar("description", 255)

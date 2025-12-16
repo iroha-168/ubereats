@@ -9,6 +9,7 @@ import org.jetbrains.exposed.v1.jdbc.insert
 import org.jetbrains.exposed.v1.jdbc.update
 
 class RestaurantMenuItemRepositoryImpl: RestaurantMenuItemRepository {
+    // TODO: クエリ（読み込み）はQueryServiceに書く
 //    override fun findByRestaurantId(restaurantId: String): Result<RestaurantMenuItem> = runCatching {
 //        RestaurantMenuItems.selectAll().where {
 //            RestaurantMenuItems.id eq restaurantId
