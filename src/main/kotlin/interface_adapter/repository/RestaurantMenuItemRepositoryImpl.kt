@@ -6,6 +6,7 @@ import interface_adapter.schema.RestaurantMenuItems
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.deleteWhere
 import org.jetbrains.exposed.v1.jdbc.insert
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 import org.jetbrains.exposed.v1.jdbc.update
 
 class RestaurantMenuItemRepositoryImpl: RestaurantMenuItemRepository {
@@ -27,30 +28,36 @@ class RestaurantMenuItemRepositoryImpl: RestaurantMenuItemRepository {
 //    }
 
     override fun create(restaurantMenuItem: RestaurantMenuItem): Result<Unit> = runCatching {
-        RestaurantMenuItems.insert {
-            it[RestaurantMenuItems.id] = restaurantMenuItem.id
-            it[RestaurantMenuItems.restaurantId] = restaurantMenuItem.restaurantId
-            it[RestaurantMenuItems.discountId] = restaurantMenuItem.discountId
-            it[RestaurantMenuItems.name] = restaurantMenuItem.name
-            it[RestaurantMenuItems.description] = restaurantMenuItem.description
-            it[RestaurantMenuItems.price] = restaurantMenuItem.price
-            it[RestaurantMenuItems.isSoldOut] = restaurantMenuItem.isSoldOut
+        transaction {
+            RestaurantMenuItems.insert {
+                it[RestaurantMenuItems.id] = restaurantMenuItem.id
+                it[RestaurantMenuItems.restaurantId] = restaurantMenuItem.restaurantId
+                it[RestaurantMenuItems.discountId] = restaurantMenuItem.discountId
+                it[RestaurantMenuItems.name] = restaurantMenuItem.name
+                it[RestaurantMenuItems.description] = restaurantMenuItem.description
+                it[RestaurantMenuItems.price] = restaurantMenuItem.price
+                it[RestaurantMenuItems.isSoldOut] = restaurantMenuItem.isSoldOut
+            }
         }
     }
 
     override fun update(restaurantMenuItem: RestaurantMenuItem): Result<Unit> = runCatching {
-        RestaurantMenuItems.update({ RestaurantMenuItems.id eq restaurantMenuItem.id}) {
-            it[RestaurantMenuItems.id] = restaurantMenuItem.id
-            it[RestaurantMenuItems.restaurantId] = restaurantMenuItem.restaurantId
-            it[RestaurantMenuItems.discountId] = restaurantMenuItem.discountId
-            it[RestaurantMenuItems.name] = restaurantMenuItem.name
-            it[RestaurantMenuItems.description] = restaurantMenuItem.description
-            it[RestaurantMenuItems.price] = restaurantMenuItem.price
-            it[RestaurantMenuItems.isSoldOut] = restaurantMenuItem.isSoldOut
+        transaction {
+            RestaurantMenuItems.update({ RestaurantMenuItems.id eq restaurantMenuItem.id}) {
+                it[RestaurantMenuItems.id] = restaurantMenuItem.id
+                it[RestaurantMenuItems.restaurantId] = restaurantMenuItem.restaurantId
+                it[RestaurantMenuItems.discountId] = restaurantMenuItem.discountId
+                it[RestaurantMenuItems.name] = restaurantMenuItem.name
+                it[RestaurantMenuItems.description] = restaurantMenuItem.description
+                it[RestaurantMenuItems.price] = restaurantMenuItem.price
+                it[RestaurantMenuItems.isSoldOut] = restaurantMenuItem.isSoldOut
+            }
         }
     }
 
     override fun delete(restaurantMenuItem: RestaurantMenuItem): Result<Unit> = runCatching {
-        RestaurantMenuItems.deleteWhere { RestaurantMenuItems.id eq restaurantMenuItem.id }
+        transaction {
+            RestaurantMenuItems.deleteWhere { RestaurantMenuItems.id eq restaurantMenuItem.id }
+        }
     }
 }
