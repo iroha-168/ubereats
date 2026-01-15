@@ -8,18 +8,18 @@ data class Discount(
     val id: String,
     val restaurantId: String,
     val name: String,
-    val percentage: Double,
+    val percentage: Float,
 ) {
     companion object {
         @OptIn(ExperimentalUuidApi::class)
-        fun create(restaurantId: String, name: String, percentage: Double): Result<Discount> {
+        fun create(restaurantId: String, name: String, percentage: Float): Result<Discount> {
             if (name.isBlank()) {
                 return Result.failure(IllegalStateException())
             }
             if (percentage < 0) {
                 return Result.failure(IllegalStateException())
             }
-            if (BigDecimal.valueOf(percentage).stripTrailingZeros().scale() > 2) {
+            if (BigDecimal.valueOf(percentage.toDouble()).stripTrailingZeros().scale() > 2) {
                 return Result.failure(IllegalStateException())
             }
             return Result.success(
