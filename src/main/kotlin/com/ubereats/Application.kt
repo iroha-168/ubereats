@@ -11,6 +11,7 @@ import io.ktor.server.routing.*
 import org.jetbrains.exposed.v1.jdbc.Database
 import org.slf4j.event.Level
 
+// ktor dev で動かせる。hot reloadしてくれたり、ログをいい感じに出してくれたりするので、intellijのRunのガターアイコンから実行するのとはまた異なる
 fun main(args: Array<String>) = EngineMain.main(args)
 
 fun Application.module() {

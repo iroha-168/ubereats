@@ -7,6 +7,9 @@ plugins {
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
+// TIPS: gradleタスクのTasks/application/run（./gradlew runのこと）を実行するとこのapplicationに設定したmainClassが実行される
+// EngineMainはktor.server.nettyに含まれていて、ktorの設定するときにここに書く
+// EngineMainが動くと、application.yamlのktor.application.modules（com.ubereats.ApplicationKt.module == fun Application.module()）を動かそうとしてくれる
 application {
     mainClass = "io.ktor.server.netty.EngineMain"
 }
