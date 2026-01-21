@@ -1,6 +1,6 @@
-package domain.restaurant.repository
+package com.ubereats.restaurant.repository
 
-import domain.restaurant.entity.RestaurantMenuItem
+import com.ubereats.restaurant.entity.RestaurantMenuItem
 
 interface RestaurantMenuItemRepository {
 //    fun findByRestaurantId(restaurantId: String): Result<RestaurantMenuItem>

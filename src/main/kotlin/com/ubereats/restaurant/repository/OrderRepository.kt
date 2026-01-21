@@ -1,7 +1,7 @@
-package domain.restaurant.repository
+package com.ubereats.restaurant.repository
 
-import domain.restaurant.entity.Order
-import domain.restaurant.entity.OrderId
+import com.ubereats.restaurant.entity.Order
+import com.ubereats.restaurant.entity.OrderId
 
 interface OrderRepository {
     fun findById(restaurantId: String, orderId: OrderId): Result<Order>

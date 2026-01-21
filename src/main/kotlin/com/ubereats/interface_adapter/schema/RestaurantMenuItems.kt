@@ -1,4 +1,4 @@
-package interface_adapter.schema
+package com.ubereats.interface_adapter.schema
 
 import org.jetbrains.exposed.v1.core.Table
 

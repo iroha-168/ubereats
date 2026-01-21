@@ -1,18 +1,19 @@
-package interface_adapter.repository
+package com.ubereats.interface_adapter.repository
 
-import domain.restaurant.entity.DeliveryAddress
-import domain.restaurant.entity.Order
-import domain.restaurant.entity.OrderId
-import domain.restaurant.entity.OrderItem
-import domain.restaurant.repository.OrderRepository
-import interface_adapter.schema.OrderItems
-import interface_adapter.schema.Orders
-import interface_adapter.schema.RestaurantMenuItems
-import interface_adapter.schema.Restaurants
+import com.ubereats.interface_adapter.schema.OrderItems
+import com.ubereats.interface_adapter.schema.Orders
+import com.ubereats.interface_adapter.schema.RestaurantMenuItems
+import com.ubereats.interface_adapter.schema.Restaurants
+import com.ubereats.restaurant.entity.DeliveryAddress
+import com.ubereats.restaurant.entity.Order
+import com.ubereats.restaurant.entity.OrderId
+import com.ubereats.restaurant.entity.OrderItem
+import com.ubereats.restaurant.repository.OrderRepository
 import org.jetbrains.exposed.v1.core.and
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.*
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+import java.util.UUID
 import kotlin.time.Clock
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
@@ -112,7 +113,7 @@ class OrderRepositoryImpl : OrderRepository {
 }
 
 // TIPS : このコードとcompose.ymlでRepository.findByIdの挙動を確認できる（デバッグコード）
-// 確認手順：dockerを起動する →  docker compose up -d をターミナルで叩く → main()をRunする
+// 確認手順：dockerを起動する →  docker compose up -d をターミナルで叩く → com.ubereats.main()をRunする
 fun main() {
     Database.connect(
         "jdbc:postgresql://localhost:5444/ubereats",
@@ -156,7 +157,7 @@ fun main() {
         OrderItems.batchInsert(listOf("1", "1", "2", "1", "2", "3")) { menuItemId ->
             this[OrderItems.menuItemId] = menuItemId
             this[OrderItems.orderId] = "1"
-            this[OrderItems.id] = java.util.UUID.randomUUID().toString()
+            this[OrderItems.id] = UUID.randomUUID().toString()
         }
 
         val repo = OrderRepositoryImpl()

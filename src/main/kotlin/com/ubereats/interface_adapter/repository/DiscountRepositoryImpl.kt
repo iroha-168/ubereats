@@ -1,8 +1,8 @@
-package interface_adapter.repository
+package com.ubereats.interface_adapter.repository
 
-import domain.restaurant.entity.Discount
-import domain.restaurant.repository.DiscountRepository
-import interface_adapter.schema.Discounts
+import com.ubereats.interface_adapter.schema.Discounts
+import com.ubereats.restaurant.entity.Discount
+import com.ubereats.restaurant.repository.DiscountRepository
 import org.jetbrains.exposed.v1.core.and
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.deleteWhere

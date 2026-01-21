@@ -1,4 +1,4 @@
-package domain.restaurant.entity
+package com.ubereats.restaurant.entity
 
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

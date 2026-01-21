@@ -1,11 +1,11 @@
-package interface_adapter.schema
+package com.ubereats.interface_adapter.schema
 
 import org.jetbrains.exposed.v1.core.Table
 import org.jetbrains.exposed.v1.datetime.CurrentTimestamp
 import org.jetbrains.exposed.v1.datetime.timestamp
 
-object Restaurants : Table("restaurant") {
-    val id = varchar("id", 36)
+object Restaurants : Table("restaurants") {
+    val id = uuid("id")
     val name = varchar("name", 255)
     val description = varchar("description", 255)
     // TIPS: DateTimeはTimeZone付きだけど、DBに入れるにはUnixTimeにしておきたいからTimeStampを使う

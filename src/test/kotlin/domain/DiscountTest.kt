@@ -1,6 +1,6 @@
 package domain
 
-import domain.restaurant.entity.Discount
+import com.ubereats.restaurant.entity.Discount
 import kotlin.test.Test
 import kotlin.uuid.ExperimentalUuidApi
 

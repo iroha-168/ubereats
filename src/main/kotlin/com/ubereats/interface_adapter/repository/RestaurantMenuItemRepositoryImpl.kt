@@ -1,8 +1,8 @@
-package interface_adapter.repository
+package com.ubereats.interface_adapter.repository
 
-import domain.restaurant.entity.RestaurantMenuItem
-import domain.restaurant.repository.RestaurantMenuItemRepository
-import interface_adapter.schema.RestaurantMenuItems
+import com.ubereats.interface_adapter.schema.RestaurantMenuItems
+import com.ubereats.restaurant.entity.RestaurantMenuItem
+import com.ubereats.restaurant.repository.RestaurantMenuItemRepository
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.deleteWhere
 import org.jetbrains.exposed.v1.jdbc.insert

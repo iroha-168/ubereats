@@ -1,6 +1,6 @@
-package domain.restaurant.service
+package com.ubereats.restaurant.service
 
-import domain.restaurant.entity.Order
+import com.ubereats.restaurant.entity.Order
 
 class MenuDeletionPolicyService {
     // メニュー削除した時に、渡されてきたメニューidで、Order DBを検索して、cancel以外のものが返ってくる（これはドメインサービスの外でやる）

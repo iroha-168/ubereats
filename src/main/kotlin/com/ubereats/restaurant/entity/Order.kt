@@ -1,4 +1,4 @@
-package domain.restaurant.entity
+package com.ubereats.restaurant.entity
 
 @JvmInline
 value class OrderId(
