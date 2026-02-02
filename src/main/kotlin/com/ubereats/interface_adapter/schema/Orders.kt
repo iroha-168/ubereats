@@ -1,6 +1,6 @@
 package com.ubereats.interface_adapter.schema
 
-import com.ubereats.restaurant.entity.Order
+import com.ubereats.domain.restaurant.entity.Order
 import org.jetbrains.exposed.v1.core.ReferenceOption
 import org.jetbrains.exposed.v1.core.Table
 

@@ -33,7 +33,11 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:1.0.0-rc-3")
     implementation("org.jetbrains.exposed:exposed-jdbc:1.0.0-rc-3")
     implementation("org.jetbrains.exposed:exposed-kotlin-datetime:1.0.0-rc-3")
+    implementation("org.jetbrains.exposed:exposed-migration-core:1.0.0")
+    implementation("org.jetbrains.exposed:exposed-migration-jdbc:1.0.0")
     implementation("org.postgresql:postgresql:42.7.3")
+    implementation("org.flywaydb:flyway-core:11.18.0")
+    implementation("org.flywaydb:flyway-database-postgresql:11.18.0")
     // test
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit5"))
@@ -47,5 +51,27 @@ tasks.test {
 kotlin {
     compilerOptions {
         optIn.add("kotlin.time.ExperimentalTime")
+        optIn.add("kotlin.uuid.ExperimentalUuidApi")
     }
+}
+
+val generate by tasks.registering(JavaExec::class) {
+    group = "db"
+    mainClass.set("tools.GenerateMigrationFileKt")
+    classpath = sourceSets["main"].runtimeClasspath
+    args = listOf(project.findProperty("args")?.toString() ?: "")
+}
+val migrate by tasks.registering(JavaExec::class) {
+    group = "db"
+    mainClass.set("tools.ApplyMigrationKt")
+    classpath = sourceSets["main"].runtimeClasspath
+}
+val reset by tasks.registering(JavaExec::class) {
+    group = "db"
+    mainClass.set("tools.ResetDbKt")
+    classpath = sourceSets["main"].runtimeClasspath
+}
+val setup by tasks.registering {
+    group = "db"
+    dependsOn(generate, migrate)
 }

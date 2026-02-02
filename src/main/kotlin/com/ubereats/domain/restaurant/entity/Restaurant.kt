@@ -1,10 +1,10 @@
-package com.ubereats.restaurant.entity
+package com.ubereats.domain.restaurant.entity
 
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 data class Restaurant(
-    val id: String,
+    val id: Uuid,
     val name: String,
     val description: String,
 ) {
@@ -21,7 +21,7 @@ data class Restaurant(
             }
             return Result.success(
                 Restaurant(
-                    id = Uuid.random().toString(),
+                    id = Uuid.random(),
                     name = name,
                     description = description,
                 )

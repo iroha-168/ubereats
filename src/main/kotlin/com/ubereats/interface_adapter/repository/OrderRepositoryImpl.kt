@@ -2,25 +2,21 @@ package com.ubereats.interface_adapter.repository
 
 import com.ubereats.interface_adapter.schema.OrderItems
 import com.ubereats.interface_adapter.schema.Orders
-import com.ubereats.interface_adapter.schema.RestaurantMenuItems
-import com.ubereats.interface_adapter.schema.Restaurants
-import com.ubereats.restaurant.entity.DeliveryAddress
-import com.ubereats.restaurant.entity.Order
-import com.ubereats.restaurant.entity.OrderId
-import com.ubereats.restaurant.entity.OrderItem
-import com.ubereats.restaurant.repository.OrderRepository
+import com.ubereats.domain.restaurant.entity.DeliveryAddress
+import com.ubereats.domain.restaurant.entity.Order
+import com.ubereats.domain.restaurant.entity.OrderId
+import com.ubereats.domain.restaurant.entity.OrderItem
+import com.ubereats.domain.restaurant.repository.OrderRepository
 import org.jetbrains.exposed.v1.core.and
 import org.jetbrains.exposed.v1.core.eq
 import org.jetbrains.exposed.v1.jdbc.*
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
-import java.util.UUID
-import kotlin.time.Clock
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 class OrderRepositoryImpl : OrderRepository {
     override fun findById(
-        restaurantId: String,
+        restaurantId: Uuid,
         orderId: OrderId
     ): Result<Order> = runCatching{
         transaction {
@@ -114,57 +110,57 @@ class OrderRepositoryImpl : OrderRepository {
 
 // TIPS : このコードとcompose.ymlでRepository.findByIdの挙動を確認できる（デバッグコード）
 // 確認手順：dockerを起動する →  docker compose up -d をターミナルで叩く → com.ubereats.main()をRunする
-fun main() {
-    Database.connect(
-        "jdbc:postgresql://localhost:5444/ubereats",
-        driver = "org.postgresql.Driver",
-        user = "postgres",
-        password = "postgres"
-    )
-    transaction {
-        SchemaUtils.drop(Orders, RestaurantMenuItems, OrderItems, Restaurants)
-        SchemaUtils.create(Orders, RestaurantMenuItems, OrderItems, Restaurants)
-
-        Restaurants.insert {
-            it[Restaurants.id] = "1"
-            it[Restaurants.name] = "test"
-            it[Restaurants.description] = "test"
-            it[Restaurants.createdAt] = Clock.System.now()
-            it[Restaurants.updatedAt] = Clock.System.now()
-        }
-
-        RestaurantMenuItems.batchInsert(listOf("1", "2", "3")) { id ->
-            this[RestaurantMenuItems.id] = id
-            this[RestaurantMenuItems.restaurantId] = "1"
-            this[RestaurantMenuItems.name] = "test"
-            this[RestaurantMenuItems.description] = "test"
-            this[RestaurantMenuItems.price] = 1000
-            this[RestaurantMenuItems.isSoldOut] = false
-        }
-
-        Orders.insert {
-            it[Orders.id] = "1"
-            it[Orders.restaurantId] = "1"
-            it[Orders.customerId] = "1"
-            it[Orders.status] = Order.OrderStatus.PREPARING
-            it[Orders.postalCode] = "123-4567"
-            it[Orders.prefecture] = "tokyo"
-            it[Orders.city] = "tokyo"
-            it[Orders.street] = "test"
-            it[Orders.building] = "1-1-1"
-        }
-
-        OrderItems.batchInsert(listOf("1", "1", "2", "1", "2", "3")) { menuItemId ->
-            this[OrderItems.menuItemId] = menuItemId
-            this[OrderItems.orderId] = "1"
-            this[OrderItems.id] = UUID.randomUUID().toString()
-        }
-
-        val repo = OrderRepositoryImpl()
-        repo.findById("1", OrderId("1"))
-            .onSuccess { println(it) }
-            .onFailure {
-                println(it)
-            }
-    }
-}
+//fun main() {
+//    Database.connect(
+//        "jdbc:postgresql://localhost:5444/ubereats",
+//        driver = "org.postgresql.Driver",
+//        user = "postgres",
+//        password = "postgres"
+//    )
+//    transaction {
+//        SchemaUtils.drop(Orders, RestaurantMenuItems, OrderItems, Restaurants)
+//        SchemaUtils.create(Orders, RestaurantMenuItems, OrderItems, Restaurants)
+//
+//        Restaurants.insert {
+//            it[Restaurants.id] = "1"
+//            it[Restaurants.name] = "test"
+//            it[Restaurants.description] = "test"
+//            it[Restaurants.createdAt] = Clock.System.now()
+//            it[Restaurants.updatedAt] = Clock.System.now()
+//        }
+//
+//        RestaurantMenuItems.batchInsert(listOf("1", "2", "3")) { id ->
+//            this[RestaurantMenuItems.id] = id
+//            this[RestaurantMenuItems.restaurantId] = "1"
+//            this[RestaurantMenuItems.name] = "test"
+//            this[RestaurantMenuItems.description] = "test"
+//            this[RestaurantMenuItems.price] = 1000
+//            this[RestaurantMenuItems.isSoldOut] = false
+//        }
+//
+//        Orders.insert {
+//            it[Orders.id] = "1"
+//            it[Orders.restaurantId] = "1"
+//            it[Orders.customerId] = "1"
+//            it[Orders.status] = Order.OrderStatus.PREPARING
+//            it[Orders.postalCode] = "123-4567"
+//            it[Orders.prefecture] = "tokyo"
+//            it[Orders.city] = "tokyo"
+//            it[Orders.street] = "test"
+//            it[Orders.building] = "1-1-1"
+//        }
+//
+//        OrderItems.batchInsert(listOf("1", "1", "2", "1", "2", "3")) { menuItemId ->
+//            this[OrderItems.menuItemId] = menuItemId
+//            this[OrderItems.orderId] = "1"
+//            this[OrderItems.id] = UUID.randomUUID().toString()
+//        }
+//
+//        val repo = OrderRepositoryImpl()
+//        repo.findById("1", OrderId("1"))
+//            .onSuccess { println(it) }
+//            .onFailure {
+//                println(it)
+//            }
+//    }
+//}

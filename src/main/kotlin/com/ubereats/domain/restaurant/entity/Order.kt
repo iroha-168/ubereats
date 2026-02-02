@@ -1,4 +1,6 @@
-package com.ubereats.restaurant.entity
+package com.ubereats.domain.restaurant.entity
+
+import kotlin.uuid.Uuid
 
 @JvmInline
 value class OrderId(
@@ -9,7 +11,7 @@ value class OrderId(
 // ラーメン1個 ＋ 半チャーハン1個 + 餃子 みたいな
 data class Order(
     val id: OrderId,
-    val restaurantId: String,
+    val restaurantId: Uuid,
     val customerId: String,
     val deliveryAddress: DeliveryAddress,
     val orderItems: List<OrderItem>,

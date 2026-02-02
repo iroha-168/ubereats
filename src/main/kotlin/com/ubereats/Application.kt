@@ -21,14 +21,17 @@ fun Application.module() {
     install(CallLogging) {
         level = Level.INFO
     }
+    connectAndMigration()
+    val restaurantRepository = RestaurantRepositoryImpl()
+    routing {
+        restaurantHandler(restaurantRepository)
+    }
+}
+
+private fun connectAndMigration() {
     Database.connect(
         url = "jdbc:postgresql://localhost:5444/ubereats",
         user = "postgres",
         password = "postgres",
     )
-
-    val restaurantRepository = RestaurantRepositoryImpl()
-    routing {
-        restaurantHandler(restaurantRepository)
-    }
 }

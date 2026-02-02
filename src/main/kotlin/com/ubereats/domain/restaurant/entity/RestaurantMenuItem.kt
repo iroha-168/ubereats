@@ -1,11 +1,11 @@
-package com.ubereats.restaurant.entity
+package com.ubereats.domain.restaurant.entity
 
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 data class RestaurantMenuItem(
     val id: String,
-    val restaurantId: String,
+    val restaurantId: Uuid,
     val discountId: String?,
     val name: String,
     val description: String,
@@ -15,7 +15,7 @@ data class RestaurantMenuItem(
     companion object {
         @OptIn(ExperimentalUuidApi::class)
         fun create(
-            restaurantId: String,
+            restaurantId: Uuid,
             name: String,
             discountId: String?,
             description: String,

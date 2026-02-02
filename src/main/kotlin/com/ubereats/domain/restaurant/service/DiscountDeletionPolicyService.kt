@@ -1,6 +1,6 @@
-package com.ubereats.restaurant.service
+package com.ubereats.domain.restaurant.service
 
-import com.ubereats.restaurant.entity.RestaurantMenuItem
+import com.ubereats.domain.restaurant.entity.RestaurantMenuItem
 
 class DiscountDeletionPolicyService {
     operator fun invoke(menuList: List<RestaurantMenuItem>): Result<Unit> {

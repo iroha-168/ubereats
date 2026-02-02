@@ -1,18 +1,18 @@
-package com.ubereats.restaurant.entity
+package com.ubereats.domain.restaurant.entity
 
 import java.math.BigDecimal
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 data class Discount(
-    val id: String,
-    val restaurantId: String,
+    val id: Uuid,
+    val restaurantId: Uuid,
     val name: String,
     val percentage: Float,
 ) {
     companion object {
         @OptIn(ExperimentalUuidApi::class)
-        fun create(restaurantId: String, name: String, percentage: Float): Result<Discount> {
+        fun create(restaurantId: Uuid, name: String, percentage: Float): Result<Discount> {
             if (name.isBlank()) {
                 return Result.failure(IllegalStateException())
             }
@@ -24,7 +24,7 @@ data class Discount(
             }
             return Result.success(
                 Discount(
-                    id = Uuid.random().toString(),
+                    id = Uuid.random(),
                     restaurantId = restaurantId,
                     name = name,
                     percentage = percentage,
@@ -33,7 +33,7 @@ data class Discount(
         }
     }
 
-    fun delete(id: String): Result<Discount> {
+    fun delete(id: Uuid): Result<Discount> {
         return Result.success(
             Discount(
                 id = id,

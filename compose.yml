@@ -11,7 +11,7 @@ services:
       - pgdata:/var/lib/postgresql/data
       # migration dir配下のファイルをcompose.ymlに登録することで、DB作成時（docker compose up -d）に毎回実行される
       # docker desktopのvolumeから削除するまでは、ホスト側にDBの情報が永続化されている
-      - ./db/migrations:/docker-entrypoint-initdb.d
+#      - ./db/migrations:/docker-entrypoint-initdb.d
 
 volumes:
   pgdata:

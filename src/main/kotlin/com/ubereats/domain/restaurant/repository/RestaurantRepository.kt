@@ -1,9 +1,10 @@
-package com.ubereats.restaurant.repository
+package com.ubereats.domain.restaurant.repository
 
-import com.ubereats.restaurant.entity.Restaurant
+import com.ubereats.domain.restaurant.entity.Restaurant
+import kotlin.uuid.Uuid
 
 interface RestaurantRepository {
-    fun findById(restaurantId: String): Result<Restaurant>
+    fun findById(restaurantId: Uuid): Result<Restaurant>
 
     fun create(restaurant: Restaurant): Result<Unit>
 

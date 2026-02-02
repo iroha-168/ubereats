@@ -1,8 +1,8 @@
-package com.ubereats.restaurant.service
+package com.ubereats.domain.restaurant.service
 
-import com.ubereats.restaurant.entity.Order
+import com.ubereats.domain.restaurant.entity.Order
 
-class MenuStateChangePolicyService {
+class RestaurantUpdatePolicyService {
     operator fun invoke(orders: List<Order>): Result<Unit> {
         return if (!orders.isEmpty()) {
             Result.failure(IllegalStateException())

@@ -1,7 +1,7 @@
 package com.ubereats.interface_adapter.handler
 
-import com.ubereats.restaurant.entity.Restaurant
-import com.ubereats.restaurant.repository.RestaurantRepository
+import com.ubereats.domain.restaurant.entity.Restaurant
+import com.ubereats.domain.restaurant.repository.RestaurantRepository
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond

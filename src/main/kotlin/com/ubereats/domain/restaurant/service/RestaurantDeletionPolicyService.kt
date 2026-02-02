@@ -1,6 +1,6 @@
-package com.ubereats.restaurant.service
+package com.ubereats.domain.restaurant.service
 
-import com.ubereats.restaurant.entity.Order
+import com.ubereats.domain.restaurant.entity.Order
 
 class RestaurantDeletionPolicyService {
     // TIPS: Repositoryを介して、SQLの条件式によって、CANCEL以外の注文を全て取得するってことができるから、
