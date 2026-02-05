@@ -29,6 +29,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:${ktorVersion}")
     implementation("io.ktor:ktor-server-content-negotiation:${ktorVersion}")
     implementation("io.ktor:ktor-server-call-logging:${ktorVersion}")
+    implementation("io.ktor:ktor-server-auth:${ktorVersion}")
     // orm
     implementation("org.jetbrains.exposed:exposed-core:1.0.0-rc-3")
     implementation("org.jetbrains.exposed:exposed-jdbc:1.0.0-rc-3")
@@ -42,6 +43,8 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-params:6.0.1")
+    // firebase auth
+    implementation("com.google.firebase:firebase-admin:9.7.1")
 }
 
 tasks.test {
